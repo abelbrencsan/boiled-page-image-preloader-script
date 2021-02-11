@@ -39,7 +39,12 @@ var ImagePreloader = (function(){
 				loadedSourceCount++;
 				if (loadedSourceCount == totalSourceCount) {
 					for (var j = 0; j < images.length; j++) {
-						images[j].setAttribute('src', images[j].getAttribute(options.attribute));
+						if (images[j].hasAttribute('srcset')) {
+							images[j].setAttribute('srcset', images[j].getAttribute(options.attribute));
+						}
+						else {
+							images[j].setAttribute('src', images[j].getAttribute(options.attribute));
+						}
 						images[j].removeAttribute(options.attribute);
 						images[j].classList.add(options.isPreloadedClass);
 						options.wrapper.classList.add(options.areAllPreloadedClass);
